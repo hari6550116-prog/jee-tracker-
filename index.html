@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JEE Advanced — My Journey</title>
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="JEE Advanced">
+<meta name="theme-color" content="#04050a">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Bebas+Neue&family=Crimson+Pro:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#04050a;--surface:#0c0e1a;--accent:#f5c518;--accent2:#e85d3a;--text:#e8e4d9;--muted:#5a5870;--glow:rgba(245,197,24,0.15);--green:#4ecca3}
+body{background:var(--bg);color:var(--text);font-family:"Space Mono",monospace;min-height:100vh;overflow-x:hidden}
+.stars{position:fixed;inset:0;pointer-events:none;z-index:0}
+.star{position:absolute;border-radius:50%;background:white;animation:twinkle var(--d) ease-in-out infinite alternate}
+@keyframes twinkle{from{opacity:var(--min-op)}to{opacity:var(--max-op)}}
+.nebula{position:fixed;border-radius:50%;filter:blur(80px);pointer-events:none;z-index:0}
+.n1{width:500px;height:500px;background:rgba(232,93,58,0.07);top:-100px;right:-100px}
+.n2{width:600px;height:600px;background:rgba(245,197,24,0.05);bottom:-200px;left:-150px}
+.n3{width:300px;height:300px;background:rgba(80,100,220,0.06);top:40%;left:40%}
+.wrapper{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:40px 20px 60px}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.header{text-align:center;margin-bottom:48px;animation:fadeDown 1s ease both}
+.label-top{font-size:11px;letter-spacing:6px;color:var(--accent);text-transform:uppercase;margin-bottom:12px}
+.title{font-family:"Bebas Neue",sans-serif;font-size:clamp(52px,12vw,100px);line-height:0.9;color:var(--text);letter-spacing:4px}
+.title span{color:var(--accent)}
+.subtitle{font-family:"Crimson Pro",serif;font-style:italic;font-size:18px;color:var(--muted);margin-top:10px;letter-spacing:1px}
+.arc-section{margin-bottom:44px;animation:fadeUp 1s 0.3s ease both;display:flex;flex-direction:column;align-items:center}
+.arc-container{position:relative;width:260px;height:160px}
+.arc-container svg{width:260px;height:160px;overflow:visible}
+.arc-bg{stroke:#1a1c2e;fill:none;stroke-width:10;stroke-linecap:round}
+.arc-fill-done{stroke:var(--accent2);fill:none;stroke-width:10;stroke-linecap:round;transition:stroke-dashoffset 2s cubic-bezier(0.4,0,0.2,1);filter:drop-shadow(0 0 6px rgba(232,93,58,0.6))}
+.arc-fill{stroke:var(--accent);fill:none;stroke-width:10;stroke-linecap:round;transition:stroke-dashoffset 2s cubic-bezier(0.4,0,0.2,1);filter:drop-shadow(0 0 6px rgba(245,197,24,0.6))}
+.arc-center-text{position:absolute;bottom:0;left:50%;transform:translateX(-50%);text-align:center}
+.arc-percent{font-family:"Bebas Neue",sans-serif;font-size:48px;line-height:1;color:var(--accent)}
+.arc-label{font-size:9px;letter-spacing:3px;color:var(--muted);text-transform:uppercase}
+.progress-labels{display:flex;gap:32px;margin-top:16px;font-size:10px;letter-spacing:2px;color:var(--muted);text-transform:uppercase}
+.progress-labels span{display:flex;align-items:center;gap:6px}
+.dot{width:8px;height:8px;border-radius:50%}
+.dot-done{background:var(--accent2)}.dot-left{background:var(--accent)}
+.countdown-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;width:100%;max-width:480px;margin-bottom:36px;animation:fadeUp 1s 0.5s ease both}
+.count-block{background:var(--surface);border:1px solid #1a1d2f;border-radius:12px;padding:20px 10px 16px;text-align:center;position:relative;overflow:hidden}
+.count-block::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:0.5}
+.count-num{font-family:"Bebas Neue",sans-serif;font-size:44px;line-height:1;color:var(--text);text-shadow:0 0 20px var(--glow)}
+.count-num.pulse{animation:numPulse 0.3s ease}
+@keyframes numPulse{0%{transform:scale(1);color:var(--accent)}50%{transform:scale(1.1)}100%{transform:scale(1);color:var(--text)}}
+.count-unit{font-size:8px;letter-spacing:3px;color:var(--muted);text-transform:uppercase;margin-top:6px}
+.stats-row{display:flex;gap:12px;width:100%;max-width:480px;margin-bottom:28px;animation:fadeUp 1s 0.6s ease both}
+.stat-card{flex:1;background:var(--surface);border:1px solid #1a1d2f;border-radius:10px;padding:14px 10px;text-align:center}
+.stat-num{font-family:"Bebas Neue",sans-serif;font-size:28px;color:var(--accent2)}
+.stat-label{font-size:8px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-top:4px}
+.date-editor{width:100%;max-width:480px;margin-bottom:20px;animation:fadeUp 1s 0.65s ease both}
+.date-editor label{font-size:9px;letter-spacing:3px;color:var(--muted);text-transform:uppercase;display:block;margin-bottom:8px}
+.date-input-row{display:flex;gap:10px;align-items:center}
+.date-input-row input{flex:1;background:var(--surface);border:1px solid #2a2d45;border-radius:8px;color:var(--text);font-family:"Space Mono",monospace;font-size:13px;padding:10px 14px;outline:none;transition:border-color 0.2s;min-width:0}
+.date-input-row input:focus{border-color:var(--accent)}
+.date-input-row input[type="date"]::-webkit-calendar-picker-indicator{filter:invert(0.6);cursor:pointer}
+.set-btn{background:var(--accent);color:#000;font-family:"Space Mono",monospace;font-size:10px;font-weight:700;letter-spacing:2px;border:none;border-radius:8px;padding:11px 16px;cursor:pointer;transition:all 0.2s;text-transform:uppercase;white-space:nowrap}
+.set-btn:hover{background:#ffd84a;transform:scale(1.02)}
+.section-card{width:100%;max-width:480px;background:var(--surface);border:1px solid #1a1d2f;border-radius:14px;padding:22px 24px;margin-bottom:24px;animation:fadeUp 1s 0.7s ease both}
+.section-title{font-size:10px;letter-spacing:4px;color:var(--accent);text-transform:uppercase;margin-bottom:18px}
+.subjects{display:flex;flex-direction:column;gap:14px}
+.subject-row{display:flex;flex-direction:column;gap:6px}
+.subject-top{display:flex;justify-content:space-between;align-items:center}
+.subject-name{font-size:11px;letter-spacing:2px;color:var(--text);text-transform:uppercase}
+.subject-hours{font-size:10px;color:var(--muted)}
+.bar-track{height:6px;background:#12141f;border-radius:3px;overflow:hidden}
+.bar-fill{height:100%;border-radius:3px;transition:width 0.8s cubic-bezier(0.4,0,0.2,1)}
+.bar-ph{background:linear-gradient(90deg,#e85d3a,#f5c518)}
+.bar-ch{background:linear-gradient(90deg,#3a7bd5,#5ce1e6)}
+.bar-ma{background:linear-gradient(90deg,#c471ed,#f64f59)}
+.hours-input-row{display:flex;gap:5px;margin-top:6px;flex-wrap:wrap}
+.hours-btn{flex:1;min-width:28px;background:#12141f;border:1px solid #2a2d45;border-radius:6px;color:var(--text);font-family:"Space Mono",monospace;font-size:9px;padding:6px 2px;cursor:pointer;transition:all 0.2s;letter-spacing:1px}
+.hours-btn:hover{background:#1a1d30;border-color:var(--accent);color:var(--accent)}
+.hours-btn.active{background:var(--accent);color:#000;border-color:var(--accent);font-weight:700}
+.streak-bar{display:flex;align-items:center;justify-content:space-between;margin-top:18px;padding-top:14px;border-top:1px solid #1a1d2f}
+.streak-info{display:flex;align-items:center;gap:8px}
+.streak-fire{font-size:20px}
+.streak-num{font-family:"Bebas Neue",sans-serif;font-size:28px;color:var(--accent)}
+.streak-label{font-size:8px;letter-spacing:2px;color:var(--muted);text-transform:uppercase}
+.streak-dots{display:flex;gap:4px}
+.streak-dot{width:8px;height:8px;border-radius:50%;background:#1a1d2f}
+.streak-dot.active{background:var(--accent);box-shadow:0 0 4px rgba(245,197,24,0.5)}
+.streak-dot.today{background:var(--green);box-shadow:0 0 4px rgba(78,204,163,0.5)}
+.pomo-wrap{display:flex;flex-direction:column;align-items:center;gap:14px}
+.pomo-mode-row{display:flex;gap:6px;width:100%}
+.pomo-mode-btn{flex:1;padding:7px 4px;border-radius:7px;border:1px solid #2a2d45;background:transparent;color:var(--muted);font-family:"Space Mono",monospace;font-size:9px;cursor:pointer;transition:all 0.2s;text-transform:uppercase}
+.pomo-mode-btn.active{background:#1a1d30;border-color:var(--accent2);color:var(--accent2)}
+.pomo-ring{position:relative}
+.pomo-ring svg{transform:rotate(-90deg)}
+.pomo-ring-bg{stroke:#1a1c2e;fill:none;stroke-width:8}
+.pomo-ring-fill{fill:none;stroke-width:8;stroke-linecap:round;stroke:var(--accent);transition:stroke-dashoffset 1s linear;filter:drop-shadow(0 0 5px rgba(245,197,24,0.4))}
+.pomo-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.pomo-time{font-family:"Bebas Neue",sans-serif;font-size:38px;color:var(--text);letter-spacing:2px;line-height:1}
+.pomo-phase{font-size:8px;letter-spacing:3px;color:var(--muted);text-transform:uppercase;margin-top:2px}
+.pomo-btns{display:flex;gap:10px}
+.pomo-btn{background:#12141f;border:1px solid #2a2d45;border-radius:8px;color:var(--text);font-family:"Space Mono",monospace;font-size:10px;padding:9px 18px;cursor:pointer;transition:all 0.2s;letter-spacing:1px}
+.pomo-btn:hover{border-color:var(--accent);color:var(--accent)}
+.pomo-btn.primary{background:var(--accent);color:#000;border-color:var(--accent);font-weight:700}
+.pomo-btn.primary:hover{background:#ffd84a}
+.pomo-sessions{font-size:9px;color:var(--muted);letter-spacing:2px;text-transform:uppercase}
+.topic-tabs{display:flex;gap:6px;margin-bottom:14px}
+.topic-tab{flex:1;padding:6px;border-radius:7px;border:1px solid #2a2d45;background:transparent;color:var(--muted);font-family:"Space Mono",monospace;font-size:9px;letter-spacing:1px;cursor:pointer;transition:all 0.2s;text-transform:uppercase}
+.topic-tab.active{background:var(--accent);color:#000;border-color:var(--accent);font-weight:700}
+.topic-progress{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.topic-progress-text{font-size:9px;color:var(--muted);letter-spacing:1px}
+.topic-progress-pct{font-family:"Bebas Neue",sans-serif;font-size:18px;color:var(--accent)}
+.topic-list{display:flex;flex-direction:column;gap:6px;max-height:260px;overflow-y:auto;margin-bottom:12px}
+.topic-list::-webkit-scrollbar{width:3px}
+.topic-list::-webkit-scrollbar-thumb{background:#2a2d45;border-radius:2px}
+.topic-item{display:flex;align-items:center;gap:10px;padding:9px 12px;background:#0d0f1e;border:1px solid #1a1d2f;border-radius:8px;cursor:pointer;transition:all 0.2s}
+.topic-item:hover{border-color:var(--muted)}
+.topic-item.done{border-color:var(--green);background:rgba(78,204,163,0.04)}
+.topic-check{width:16px;height:16px;border-radius:4px;border:2px solid var(--muted);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:9px;transition:all 0.2s}
+.topic-item.done .topic-check{background:var(--green);border-color:var(--green);color:#000}
+.topic-name{font-size:11px;color:var(--text);flex:1}
+.topic-item.done .topic-name{color:var(--muted);text-decoration:line-through}
+.topic-del{background:none;border:none;color:var(--muted);font-size:11px;cursor:pointer;padding:2px 4px;flex-shrink:0;transition:color 0.2s}
+.topic-del:hover{color:var(--accent2)}
+.add-row{display:flex;gap:8px}
+.add-input{flex:1;background:#0d0f1e;border:1px solid #2a2d45;border-radius:7px;color:var(--text);font-family:"Space Mono",monospace;font-size:11px;padding:8px 11px;outline:none;transition:border-color 0.2s}
+.add-input:focus{border-color:var(--accent)}
+.add-input::placeholder{color:var(--muted)}
+.add-btn{background:var(--accent);color:#000;border:none;border-radius:7px;font-family:"Space Mono",monospace;font-size:14px;font-weight:700;width:34px;height:34px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.2s}
+.add-btn:hover{background:#ffd84a;transform:scale(1.05)}
+.test-list{display:flex;flex-direction:column;gap:8px;margin-bottom:14px;max-height:200px;overflow-y:auto}
+.test-list::-webkit-scrollbar{width:3px}
+.test-list::-webkit-scrollbar-thumb{background:#2a2d45;border-radius:2px}
+.test-item{display:flex;align-items:center;gap:10px;padding:10px 12px;background:#0d0f1e;border:1px solid #1a1d2f;border-radius:8px}
+.test-date-lbl{font-size:9px;color:var(--muted);letter-spacing:1px;flex-shrink:0}
+.test-name-lbl{font-size:11px;color:var(--text);flex:1}
+.test-score-lbl{font-family:"Bebas Neue",sans-serif;font-size:20px;flex-shrink:0}
+.test-del{background:none;border:none;color:var(--muted);font-size:14px;cursor:pointer;opacity:0.4;transition:opacity 0.2s;flex-shrink:0;padding:4px 6px}
+.test-item:hover .test-del{opacity:1}
+.test-del:hover{color:var(--accent2)}
+.test-add-row{display:flex;gap:6px;flex-wrap:wrap}
+.test-input{background:#0d0f1e;border:1px solid #2a2d45;border-radius:7px;color:var(--text);font-family:"Space Mono",monospace;font-size:11px;padding:8px 10px;outline:none;transition:border-color 0.2s}
+.test-input:focus{border-color:var(--accent)}
+.test-input::placeholder{color:var(--muted)}
+.test-input.nm{flex:2;min-width:100px}
+.test-input.sc{flex:1;min-width:60px}
+.test-avg{text-align:right;font-size:9px;color:var(--muted);letter-spacing:1px;margin-top:8px}
+.test-avg span{color:var(--accent);font-family:"Bebas Neue",sans-serif;font-size:16px}
+.milestone-list{display:flex;flex-direction:column;gap:10px}
+.milestone-item{display:flex;align-items:center;gap:12px;font-size:11px;color:var(--muted);letter-spacing:1px}
+.milestone-dot{width:10px;height:10px;border-radius:50%;border:2px solid var(--muted);flex-shrink:0;transition:all 0.5s}
+.milestone-dot.reached{background:var(--accent2);border-color:var(--accent2);box-shadow:0 0 8px rgba(232,93,58,0.5)}
+.milestone-dot.next{border-color:var(--accent);animation:pulseDot 1.5s ease infinite}
+@keyframes pulseDot{0%,100%{box-shadow:0 0 0 0 rgba(245,197,24,0.4)}50%{box-shadow:0 0 0 6px rgba(245,197,24,0)}}
+.milestone-text{flex:1}
+.milestone-date{font-size:10px;color:#3a3d5a;font-family:"Space Mono",monospace}
+.quote-box{width:100%;max-width:480px;text-align:center;padding:24px;border-top:1px solid #1a1d2f;animation:fadeUp 1s 0.9s ease both}
+.quote-text{font-family:"Crimson Pro",serif;font-style:italic;font-size:17px;color:var(--muted);line-height:1.6;transition:opacity 0.5s}
+.quote-text span{color:var(--accent);font-style:normal}
+@media(max-width:400px){.countdown-grid{grid-template-columns:repeat(2,1fr)}.title{font-size:52px}.test-add-row{flex-direction:column}}
+</style>
+</head>
+<body>
+<div class="stars" id="stars"></div>
+<div class="nebula n1"></div><div class="nebula n2"></div><div class="nebula n3"></div>
+<div class="wrapper">
+
+<div class="header">
+  <div class="label-top">⚡ Mission IIT</div>
+  <div class="title">JEE<br><span>Advanced</span></div>
+  <div class="subtitle">Two years. One shot. Everything.</div>
+</div>
+
+<div class="arc-section">
+  <div class="arc-container">
+    <svg viewBox="0 0 260 160">
+      <path class="arc-bg" d="M 20,140 A 110,110 0 0,1 240,140"/>
+      <path id="arcDone" class="arc-fill-done" d="M 20,140 A 110,110 0 0,1 240,140"/>
+      <path id="arcLeft" class="arc-fill" d="M 20,140 A 110,110 0 0,1 240,140"/>
+    </svg>
+    <div class="arc-center-text">
+      <div class="arc-percent" id="arcPercent">0%</div>
+      <div class="arc-label">Journey Done</div>
+    </div>
+  </div>
+  <div class="progress-labels">
+    <span><span class="dot dot-done"></span>Time Elapsed</span>
+    <span><span class="dot dot-left"></span>Time Remaining</span>
+  </div>
+</div>
+
+<div class="countdown-grid">
+  <div class="count-block"><div class="count-num" id="days">---</div><div class="count-unit">Days</div></div>
+  <div class="count-block"><div class="count-num" id="hours">--</div><div class="count-unit">Hours</div></div>
+  <div class="count-block"><div class="count-num" id="mins">--</div><div class="count-unit">Mins</div></div>
+  <div class="count-block"><div class="count-num" id="secs">--</div><div class="count-unit">Secs</div></div>
+</div>
+
+<div class="stats-row">
+  <div class="stat-card"><div class="stat-num" id="totalDays">--</div><div class="stat-label">Total Days</div></div>
+  <div class="stat-card"><div class="stat-num" id="daysGone">--</div><div class="stat-label">Elapsed</div></div>
+  <div class="stat-card"><div class="stat-num" id="weeksDone">--</div><div class="stat-label">Weeks Left</div></div>
+</div>
+
+<div class="date-editor">
+  <label>Set Exam Date &amp; Journey Start</label>
+  <div class="date-input-row">
+    <input type="date" id="startDateInput" title="Start">
+    <input type="date" id="examDateInput" title="Exam">
+    <button class="set-btn" onclick="saveDates()">Set</button>
+  </div>
+</div>
+
+<!-- Study Tracker + Streak -->
+<div class="section-card">
+  <div class="section-title">Today's Study Hours</div>
+  <div class="subjects">
+    <div class="subject-row">
+      <div class="subject-top"><span class="subject-name">Physics</span><span class="subject-hours" id="ph-display">0h today</span></div>
+      <div class="bar-track"><div class="bar-fill bar-ph" id="ph-bar" style="width:0%"></div></div>
+      <div class="hours-input-row" id="ph-btns"></div>
+    </div>
+    <div class="subject-row">
+      <div class="subject-top"><span class="subject-name">Chemistry</span><span class="subject-hours" id="ch-display">0h today</span></div>
+      <div class="bar-track"><div class="bar-fill bar-ch" id="ch-bar" style="width:0%"></div></div>
+      <div class="hours-input-row" id="ch-btns"></div>
+    </div>
+    <div class="subject-row">
+      <div class="subject-top"><span class="subject-name">Maths</span><span class="subject-hours" id="ma-display">0h today</span></div>
+      <div class="bar-track"><div class="bar-fill bar-ma" id="ma-bar" style="width:0%"></div></div>
+      <div class="hours-input-row" id="ma-btns"></div>
+    </div>
+  </div>
+  <div class="streak-bar">
+    <div class="streak-info">
+      <span class="streak-fire">🔥</span>
+      <div>
+        <div class="streak-num" id="streakNum">0</div>
+        <div class="streak-label">Day Streak</div>
+      </div>
+    </div>
+    <div class="streak-dots" id="streakDots"></div>
+  </div>
+</div>
+
+<!-- Pomodoro -->
+<div class="section-card">
+  <div class="section-title">Pomodoro Timer</div>
+  <div class="pomo-wrap">
+    <div class="pomo-mode-row">
+      <button class="pomo-mode-btn active" onclick="setMode('study',this)">Study 25m</button>
+      <button class="pomo-mode-btn" onclick="setMode('short',this)">Break 5m</button>
+      <button class="pomo-mode-btn" onclick="setMode('long',this)">Long 15m</button>
+    </div>
+    <div class="pomo-ring">
+      <svg width="160" height="160" viewBox="0 0 160 160">
+        <circle class="pomo-ring-bg" cx="80" cy="80" r="68"/>
+        <circle class="pomo-ring-fill" id="pomoFill" cx="80" cy="80" r="68" stroke-dasharray="427.26" stroke-dashoffset="0"/>
+      </svg>
+      <div class="pomo-center">
+        <div class="pomo-time" id="pomoTime">25:00</div>
+        <div class="pomo-phase" id="pomoPhase">Focus</div>
+      </div>
+    </div>
+    <div class="pomo-btns">
+      <button class="pomo-btn primary" id="pomoStartBtn" onclick="pomoToggle()">Start</button>
+      <button class="pomo-btn" onclick="pomoReset()">Reset</button>
+    </div>
+    <div class="pomo-sessions" id="pomoSessions">Sessions today: 0</div>
+  </div>
+</div>
+
+<!-- Topic Checklist -->
+<div class="section-card">
+  <div class="section-title">Syllabus Checklist</div>
+  <div class="topic-tabs">
+    <button class="topic-tab active" onclick="switchTopicTab('ph',this)">Physics</button>
+    <button class="topic-tab" onclick="switchTopicTab('ch',this)">Chemistry</button>
+    <button class="topic-tab" onclick="switchTopicTab('ma',this)">Maths</button>
+  </div>
+  <div class="topic-progress">
+    <span class="topic-progress-text" id="topicProgressText">0 / 0 done</span>
+    <span class="topic-progress-pct" id="topicProgressPct">0%</span>
+  </div>
+  <div class="topic-list" id="topicList"></div>
+  <div class="add-row">
+    <input class="add-input" id="topicInput" placeholder="Add topic...">
+    <button class="add-btn" onclick="addTopic()">+</button>
+  </div>
+</div>
+
+<!-- Mock Test Tracker -->
+<div class="section-card">
+  <div class="section-title">Mock Test Tracker</div>
+  <div class="test-list" id="testList"></div>
+  <div class="test-add-row">
+    <input class="test-input nm" id="testName" placeholder="Test name..." maxlength="30">
+    <input class="test-input sc" id="testScore" placeholder="Score" type="number" min="0" max="360">
+    <button class="add-btn" onclick="addTest()">+</button>
+  </div>
+  <div class="test-avg" id="testAvg"></div>
+</div>
+
+<!-- Milestones -->
+<div class="section-card">
+  <div class="section-title">Journey Milestones</div>
+  <div class="milestone-list" id="milestoneList"></div>
+</div>
+
+<div class="quote-box">
+  <div class="quote-text" id="quoteText"></div>
+</div>
+</div>
+
+<script>
+// Stars
+var se=document.getElementById("stars");
+for(var i=0;i<120;i++){var s=document.createElement("div");s.className="star";var sz=Math.random()*2.5+0.5;s.style.cssText="width:"+sz+"px;height:"+sz+"px;top:"+(Math.random()*100)+"%;left:"+(Math.random()*100)+"%;--d:"+(Math.random()*3+2).toFixed(1)+"s;--min-op:"+(Math.random()*0.2+0.05).toFixed(2)+";--max-op:"+(Math.random()*0.5+0.3).toFixed(2)+";animation-delay:"+(Math.random()*4).toFixed(1)+"s;";se.appendChild(s);}
+
+// Storage
+function lsGet(k,def){try{var v=localStorage.getItem(k);return v!==null?JSON.parse(v):def;}catch(e){return def;}}
+function lsSet(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
+function fmt(d){return d.toISOString().slice(0,10);}
+function todayKey(){return fmt(new Date());}
+function escH(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+
+// Dates
+function getDefaultExam(){var d=new Date();d.setFullYear(d.getFullYear()+2);d.setMonth(4);d.setDate(25);return fmt(d);}
+var examDate=lsGet("jee_exam_date",getDefaultExam());
+var startDate=lsGet("jee_start_date",fmt(new Date()));
+document.getElementById("examDateInput").value=examDate;
+document.getElementById("startDateInput").value=startDate;
+function updateAll(){updateMilestones();updateArc();updateStats();}
+function saveDates(){
+  var ed=document.getElementById("examDateInput").value;
+  var sd=document.getElementById("startDateInput").value;
+  if(ed){examDate=ed;lsSet("jee_exam_date",ed);}
+  if(sd){startDate=sd;lsSet("jee_start_date",sd);}
+  updateAll();
+}
+
+// Study hours
+function getStudy(){
+  if(lsGet("jee_study_date","")!==todayKey()){lsSet("jee_study_date",todayKey());lsSet("jee_study",{ph:0,ch:0,ma:0});}
+  return lsGet("jee_study",{ph:0,ch:0,ma:0});
+}
+function buildSubjectBtns(){
+  var study=getStudy();
+  ["ph","ch","ma"].forEach(function(sub){
+    var c=document.getElementById(sub+"-btns");c.innerHTML="";
+    [1,2,3,4,5,6,7,8].forEach(function(h){
+      var b=document.createElement("button");
+      b.className="hours-btn"+(study[sub]===h?" active":"");
+      b.textContent=h+"h";
+      b.onclick=function(){setHours(sub,h);};
+      c.appendChild(b);
+    });
+    updateBar(sub,study[sub]);
+  });
+  updateStreak();
+}
+function setHours(sub,h){var study=getStudy();study[sub]=(study[sub]===h?0:h);lsSet("jee_study",study);buildSubjectBtns();}
+function updateBar(sub,h){document.getElementById(sub+"-bar").style.width=(h>0?Math.min((h/8)*100,100):0)+"%";document.getElementById(sub+"-display").textContent=h>0?h+"h today":"0h today";}
+
+// Streak
+function updateStreak(){
+  var streak=0;var d=new Date();var arch=lsGet("jee_study_archive",{});
+  for(var i=0;i<365;i++){
+    var k=fmt(d);
+    var st=k===todayKey()?getStudy():(arch[k]||{ph:0,ch:0,ma:0});
+    if(st.ph+st.ch+st.ma>0){streak++;}else{break;}
+    d.setDate(d.getDate()-1);
+  }
+  document.getElementById("streakNum").textContent=streak;
+  var dotsEl=document.getElementById("streakDots");dotsEl.innerHTML="";
+  for(var j=6;j>=0;j--){
+    var dd=new Date();dd.setDate(dd.getDate()-j);var dk=fmt(dd);
+    var st2=dk===todayKey()?getStudy():(arch[dk]||{ph:0,ch:0,ma:0});
+    var dot=document.createElement("div");
+    dot.className="streak-dot"+(j===0?" today":(st2.ph+st2.ch+st2.ma>0?" active":""));
+    dotsEl.appendChild(dot);
+  }
+  var ts=getStudy();if(ts.ph+ts.ch+ts.ma>0){var a=lsGet("jee_study_archive",{});a[todayKey()]=ts;lsSet("jee_study_archive",a);}
+}
+buildSubjectBtns();
+
+// Pomodoro
+var pomoModes={study:25*60,short:5*60,long:15*60};
+var pomoMode="study",pomoTotal=pomoModes.study,pomoLeft=pomoTotal,pomoRunning=false,pomoTimer=null;
+var pomoSessCount=lsGet("jee_pomo_"+todayKey(),0);
+var pomoCircum=427.26;
+document.getElementById("pomoSessions").textContent="Sessions today: "+pomoSessCount;
+function setMode(mode,el){
+  if(pomoRunning)return;
+  pomoMode=mode;pomoTotal=pomoModes[mode];pomoLeft=pomoTotal;
+  document.querySelectorAll(".pomo-mode-btn").forEach(function(b){b.classList.remove("active");});
+  el.classList.add("active");
+  var phases={study:"Focus",short:"Short Break",long:"Long Break"};
+  document.getElementById("pomoPhase").textContent=phases[mode];
+  renderPomoTime();
+}
+function renderPomoTime(){
+  var m=Math.floor(pomoLeft/60),s=pomoLeft%60;
+  document.getElementById("pomoTime").textContent=String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
+  document.getElementById("pomoFill").style.strokeDashoffset=pomoCircum*(1-(pomoLeft/pomoTotal));
+}
+function pomoToggle(){
+  if(pomoRunning){clearInterval(pomoTimer);pomoRunning=false;document.getElementById("pomoStartBtn").textContent="Resume";}
+  else{
+    pomoRunning=true;document.getElementById("pomoStartBtn").textContent="Pause";
+    pomoTimer=setInterval(function(){
+      pomoLeft--;renderPomoTime();
+      if(pomoLeft<=0){
+        clearInterval(pomoTimer);pomoRunning=false;
+        document.getElementById("pomoStartBtn").textContent="Start";
+        if(pomoMode==="study"){pomoSessCount++;lsSet("jee_pomo_"+todayKey(),pomoSessCount);document.getElementById("pomoSessions").textContent="Sessions today: "+pomoSessCount;}
+        pomoLeft=pomoTotal;renderPomoTime();
+        alert(pomoMode==="study"?"Session complete! Take a break.":"Break over! Back to work.");
+      }
+    },1000);
+  }
+}
+function pomoReset(){clearInterval(pomoTimer);pomoRunning=false;pomoLeft=pomoTotal;document.getElementById("pomoStartBtn").textContent="Start";renderPomoTime();}
+renderPomoTime();
+
+// Topic Checklist
+var currentTopicSub="ph";
+var topics=lsGet("jee_topics",{ph:[],ch:[],ma:[]});
+var defaultTopics={
+  ph:["Kinematics","Laws of Motion","Work & Energy","Rotational Motion","Gravitation","SHM","Waves","Electrostatics","Current Electricity","Magnetism","Optics","Modern Physics","Thermodynamics"],
+  ch:["Mole Concept","Atomic Structure","Chemical Bonding","States of Matter","Thermodynamics","Equilibrium","Electrochemistry","Organic Basics","Hydrocarbons","Biomolecules","Coordination Compounds","p-Block","d-Block"],
+  ma:["Sets & Functions","Trigonometry","Algebra","Coordinate Geometry","Calculus - Limits","Calculus - Derivatives","Calculus - Integrals","Vectors","3D Geometry","Statistics","Probability","Matrices","Complex Numbers"]
+};
+["ph","ch","ma"].forEach(function(sub){
+  if(!topics[sub]||topics[sub].length===0){
+    topics[sub]=defaultTopics[sub].map(function(name){return{id:sub+Date.now()+Math.random(),name:name,done:false};});
+  }
+});
+lsSet("jee_topics",topics);
+function renderTopics(){
+  var list=topics[currentTopicSub];
+  var el=document.getElementById("topicList");el.innerHTML="";
+  var done=list.filter(function(t){return t.done;}).length;
+  var total=list.length;
+  document.getElementById("topicProgressText").textContent=done+" / "+total+" done";
+  document.getElementById("topicProgressPct").textContent=(total?Math.round((done/total)*100):0)+"%";
+  list.forEach(function(t,idx){
+    var div=document.createElement("div");
+    div.className="topic-item"+(t.done?" done":"");
+    var chk=document.createElement("div");
+    chk.className="topic-check";
+    chk.textContent=t.done?"✓":"";
+    var nm=document.createElement("div");
+    nm.className="topic-name";
+    nm.textContent=t.name;
+    var del=document.createElement("button");
+    del.className="topic-del";
+    del.textContent="✕";
+    del.addEventListener("click",function(e){e.stopPropagation();topics[currentTopicSub].splice(idx,1);lsSet("jee_topics",topics);renderTopics();});
+    div.appendChild(chk);div.appendChild(nm);div.appendChild(del);
+    div.addEventListener("click",function(){t.done=!t.done;lsSet("jee_topics",topics);renderTopics();});
+    el.appendChild(div);
+  });
+}
+function switchTopicTab(sub,el){
+  currentTopicSub=sub;
+  document.querySelectorAll(".topic-tab").forEach(function(b){b.classList.remove("active");});
+  el.classList.add("active");renderTopics();
+}
+function addTopic(){
+  var val=document.getElementById("topicInput").value.trim();if(!val)return;
+  topics[currentTopicSub].push({id:currentTopicSub+Date.now(),name:val,done:false});
+  lsSet("jee_topics",topics);document.getElementById("topicInput").value="";renderTopics();
+}
+// deleteTopic handled inline
+document.getElementById("topicInput").addEventListener("keydown",function(e){if(e.key==="Enter")addTopic();});
+renderTopics();
+
+// Mock Tests
+var tests=lsGet("jee_tests",[]);
+function renderTests(){
+  var el=document.getElementById("testList");el.innerHTML="";
+  if(!tests.length){el.innerHTML="<div style=\"text-align:center;padding:16px;font-size:10px;color:var(--muted);letter-spacing:1px\">Koi test abhi nahi</div>";document.getElementById("testAvg").innerHTML="";return;}
+  tests.forEach(function(t,idx){
+    var div=document.createElement("div");div.className="test-item";
+    var col=t.score>=200?"var(--green)":t.score>=120?"var(--accent)":"var(--accent2)";
+    div.innerHTML="<span class=\"test-date-lbl\">"+t.date+"</span><span class=\"test-name-lbl\">"+escH(t.name)+"</span><span class=\"test-score-lbl\" style=\"color:"+col+"\">"+t.score+"</span><button class=\"test-del\" onclick=\"deleteTest("+idx+")\">✕</button>";
+    el.appendChild(div);
+  });
+  var avg=Math.round(tests.reduce(function(s,t){return s+t.score;},0)/tests.length);
+  var best=Math.max.apply(null,tests.map(function(t){return t.score;}));
+  document.getElementById("testAvg").innerHTML="Avg: <span>"+avg+"</span> / 360 &nbsp;|&nbsp; Best: <span style=\"color:var(--green)\">"+best+"</span>";
+}
+function addTest(){
+  var name=document.getElementById("testName").value.trim();
+  var score=parseInt(document.getElementById("testScore").value);
+  if(!name||isNaN(score)||score<0||score>360)return;
+  tests.push({name:name,score:score,date:new Date().toLocaleDateString("en-IN",{day:"numeric",month:"short"})});
+  lsSet("jee_tests",tests);
+  document.getElementById("testName").value="";document.getElementById("testScore").value="";
+  renderTests();
+}
+function deleteTest(idx){tests.splice(idx,1);lsSet("jee_tests",tests);renderTests();}
+document.getElementById("testScore").addEventListener("keydown",function(e){if(e.key==="Enter")addTest();});
+renderTests();
+
+// Milestones
+function updateMilestones(){
+  var start=new Date(startDate),exam=new Date(examDate),totalMs=exam-start;
+  var defs=[{label:"Journey Begin",offset:0},{label:"25% Journey Done",offset:0.25},{label:"JEE Mains Attempt",offset:0.45},{label:"50% Halfway Mark",offset:0.50},{label:"Revision Phase",offset:0.75},{label:"90% — Final Sprint",offset:0.90},{label:"JEE Advanced 🎯",offset:1.0}];
+  var now=new Date(),el=document.getElementById("milestoneList");el.innerHTML="";var nextSet=false;
+  defs.forEach(function(m){
+    var mDate=new Date(start.getTime()+totalMs*m.offset);
+    var reached=now>=mDate,isNext=!reached&&!nextSet;if(isNext)nextSet=true;
+    var item=document.createElement("div");item.className="milestone-item";
+    var dot=document.createElement("div");dot.className="milestone-dot"+(reached?" reached":"")+(isNext?" next":"");
+    var text=document.createElement("div");text.className="milestone-text";text.textContent=m.label;text.style.color=reached?"var(--text)":isNext?"var(--accent)":"";
+    var date=document.createElement("div");date.className="milestone-date";date.textContent=mDate.toLocaleDateString("en-IN",{day:"numeric",month:"short",year:"numeric"});
+    item.appendChild(dot);item.appendChild(text);item.appendChild(date);el.appendChild(item);
+  });
+}
+
+// Arc
+function updateArc(){
+  var start=new Date(startDate),exam=new Date(examDate),now=new Date();
+  var total=exam-start,elapsed=Math.max(0,now-start);
+  var pct=Math.min(1,total>0?elapsed/total:0);
+  var arcLen=Math.PI*110;
+  var dp=document.getElementById("arcDone"),lp=document.getElementById("arcLeft");
+  dp.style.strokeDasharray=arcLen;dp.style.strokeDashoffset=arcLen*(1-pct);
+  lp.style.strokeDasharray=arcLen;lp.style.strokeDashoffset=arcLen*pct;
+  document.getElementById("arcPercent").textContent=Math.round(pct*100)+"%";
+}
+
+// Stats
+function updateStats(){
+  var start=new Date(startDate),exam=new Date(examDate),now=new Date();
+  document.getElementById("totalDays").textContent=Math.max(0,Math.ceil((exam-start)/864e5));
+  document.getElementById("daysGone").textContent=Math.max(0,Math.ceil((now-start)/864e5));
+  document.getElementById("weeksDone").textContent=Math.ceil(Math.max(0,Math.ceil((exam-now)/864e5))/7);
+}
+
+// Countdown
+var prevSecs=-1;
+function updateCountdown(){
+  var diff=new Date(examDate)-new Date();
+  if(diff<=0){["days","hours","mins","secs"].forEach(function(id){document.getElementById(id).textContent="0";});return;}
+  document.getElementById("days").textContent=Math.floor(diff/864e5);
+  document.getElementById("hours").textContent=String(Math.floor((diff%864e5)/36e5)).padStart(2,"0");
+  document.getElementById("mins").textContent=String(Math.floor((diff%36e5)/6e4)).padStart(2,"0");
+  var s=Math.floor((diff%6e4)/1e3);
+  var secsEl=document.getElementById("secs");secsEl.textContent=String(s).padStart(2,"0");
+  if(s!==prevSecs){secsEl.classList.remove("pulse");void secsEl.offsetWidth;secsEl.classList.add("pulse");prevSecs=s;}
+}
+
+// Quotes
+var quotes=["The pain you feel today will be the <span>strength</span> you feel tomorrow.","Every hour of study is a step closer to the <span>gates of IIT</span>.","Discipline is choosing what you want <span>most</span> over what you want now.","The difference between ordinary and extraordinary is that little <span>extra</span>.","Stars don't shine without <span>darkness</span>. Keep going.","You didn't come this far to only come <span>this far</span>.","One problem at a time. One day at a time. <span>One rank at a time.</span>","<span>Bhulio mat</span> — yeh raasta tune khud chuna hai. Har subah uth ke yaad kar: <span>IIT tera hai.</span>","Thakaan feel ho rahi hai? Theek hai. Par <span>yaad rakh</span> — jo log ab thak ke ruk jaate hain, woh result mein nahi dikhte.","Kal ke results aaj ke <span>sacrifice</span> se bante hain. <span>Yaad rakhio.</span>"];
+function setRandomQuote(){var el=document.getElementById("quoteText");el.style.opacity=0;setTimeout(function(){el.innerHTML=quotes[Math.floor(Math.random()*quotes.length)];el.style.opacity=1;},500);}
+
+// Init
+updateAll();updateCountdown();setRandomQuote();
+setInterval(updateCountdown,1000);setInterval(setRandomQuote,30000);
+</script>
+</body>
+</html>
